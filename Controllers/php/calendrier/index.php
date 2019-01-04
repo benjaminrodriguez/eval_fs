@@ -3,7 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Calendrier</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="/../../Public/css/style_calendar.css" />
+        <link rel="stylesheet" type="text/css" href="/style.css"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
         <script type="text/javascript">
             jQuery(function($){
@@ -27,8 +28,7 @@
     </head>
     <body>
         <?php
-        require('config.php'); 
-        require('date.php');
+        require(dirname(__FILE__).'/date.php');
         $date = new Date();
         $year = date('Y');
         $events = $date->getEvents($year);
@@ -89,6 +89,5 @@
             <?php endforeach; ?>
         </div>
         <div class="clear"></div>
-        <pre><?php print_r($events); ?></pre>
     </body>
 </html>

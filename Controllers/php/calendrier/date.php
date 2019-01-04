@@ -5,8 +5,8 @@ class Date{
     var $months     = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
 
     function getEvents($year){
-        global $DB;
-        $req = $DB->query('SELECT id,title,date FROM events WHERE YEAR(date)='.$year);
+        global $bdd;
+        $req = $bdd->query('SELECT id,title,date FROM events WHERE YEAR(date)='.$year);
         $r = array();
         /**
          * Ce que je veux $r[TIMESTAMP][id] = title
@@ -19,22 +19,7 @@ class Date{
 
     function getAll($year){
         $r = array();
-        /**
-         * Boucle version procédurale
-         *
-        $date = strtotime($year.'-01-01');
-        while(date('Y',$date) <= $year){
-            // Ce que je veux => $r[ANEEE][MOIS][JOUR] = JOUR DE LA SEMAINE
-            $y = date('Y',$date);
-            $m = date('n',$date);
-            $d = date('j',$date);
-            $w = str_replace('0','7',date('w',$date));
-            $r[$y][$m][$d] = $w;
-            $date = strtotime(date('Y-m-d',$date).' +1 DAY');
-        }
-        *
-         *
-         */
+       
         $date = new DateTime($year.'-01-01');
         while($date->format('Y') <= $year){
             // Ce que je veux => $r[ANEEE][MOIS][JOUR] = JOUR DE LA SEMAINE
