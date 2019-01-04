@@ -31,6 +31,8 @@ CREATE TABLE IF NOT EXISTS `Eval_fin`.`user` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `profession` VARCHAR(45) NOT NULL,
+  `profil_picture` MEDIUMTEXT NOT NULL,
+
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

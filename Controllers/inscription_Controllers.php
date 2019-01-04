@@ -4,7 +4,9 @@
     {
         $passhache = password_hash($_POST['password'],  PASSWORD_DEFAULT);
 
-        require(dirname(__FILE__).'/../Controllers/php/pp_random.php');
+        //require(dirname(__FILE__).'/../Controllers/php/pp_random.php');
+        require(dirname(__FILE__).'/../Controllers/php/profil_picture.php');
+
         //require(dirname(__FILE__).'/../Controllers/php/verif_inscription.php');
 
         /*if (
@@ -18,7 +20,7 @@
         ){*/
             $_POST['email'] = strtolower($_POST['email']);
             // APPEL DE LA FONCTION SQL INSCRIPTION
-            inscription_INSERT($_POST['nom'], $_POST['prenom'], $_POST['email'], $passhache, $_POST['profession']);
+            inscription_INSERT($_POST['nom'], $_POST['prenom'], $_POST['email'], $passhache, $_POST['profession'], $profil_picture);
             //require(dirname(__FILE__).'/../Controllers/php/mail_auto.php');
             //mail_auto_inscription();
             //send_mail();

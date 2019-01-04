@@ -38,6 +38,7 @@
                 $_SESSION['prenom'] = $data['prenom'];
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['profession'] = $data['profession'];
+                $_SESSION['profil_picture'] = $data['profil_picture'];
                
                 header('Location: index.php?page=home');
                 exit;

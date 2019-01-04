@@ -1,15 +1,15 @@
 <?php
     // ----------------------------------------------------------------------------
 
-    function inscription_INSERT ($nom, $prenom, $email, $password, $profession)
+    function inscription_INSERT ($nom, $prenom, $email, $password, $profession, $profil_picture)
     {
         $bdd = bdd();
         // INSCRIPTION
         $inscription = $bdd->prepare(
-        'INSERT INTO user (nom, prenom, email, password, profession) 
-        VALUES (?, ?, ?, ?, ?);
+        'INSERT INTO user (nom, prenom, email, password, profession, profil_picture) 
+        VALUES (?, ?, ?, ?, ?, ?);
         ');
-        $inscription->execute(array($nom, $prenom, $email, $password, $profession));
+        $inscription->execute(array($nom, $prenom, $email, $password, $profession, $profil_picture));
     }
 
     // ----------------------------------------------------------------------------

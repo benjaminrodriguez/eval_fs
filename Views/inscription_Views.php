@@ -107,7 +107,7 @@
 
             <select name="profession" class="form-control" class="champ" id="region" required>
                 <option value="region" disabled selected >Profession</option> 
-                <option value="ostéopathe">Ostéopathe</option> 
+                <option value="osteopathe">Ostéopathe</option> 
                 <option value="acupuncteur">Acupuncteur</option>
                 <option value="shiatsuki" >Shiatsuki</option>
                 <option value="hypno_thérapeute">Hypno thérapeute</option>
