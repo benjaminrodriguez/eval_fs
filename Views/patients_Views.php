@@ -285,13 +285,23 @@ window.onload = heure;
         
         <button class="btn btn-lg btn-block" name="nouvelle_fiche_patient" type="submit">Ajouter</button>
     </form>
-    <?php } 
-    if ($_GET['choix'] == 'liste_patient') 
+    <?php }
+
+    // AFFICHE TOUS LES PATIENTS 
+    if ($_GET['choix'] == 'liste_patient' && !isset($_GET['id'])) 
     { ?>
     <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un patient ..." />
     <?php 
         liste_patient_SELECT();
     }
+
+    // AFFICHE FICHE 1 PATIENT
+    if (isset($_GET['id']) && $_GET['choix'] == 'liste_patient') 
+    {
+        patient_SELECT($_GET['id']);
+    }
+
+    // AFFICHE LISTE DE TOUS LES MEDECINS
     if ($_GET['choix'] == 'liste_medecin') 
     { ?>
     <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un médecin ..." />

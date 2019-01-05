@@ -41,6 +41,20 @@
         $qcm->execute(array());
         while ($donnees = $qcm->fetch())
             {
+                ?><li><a href='./index.php?page=patients&choix=liste_patient&id=<?=$donnees["id"]?>'>Prénom : <?=$donnees['prenom']?> Nom : <?=$donnees['nom']?></a></li> <?php
+            }
+    
+    }
+    function patient_SELECT($patient_id)
+    {
+        $bdd = bdd();
+        $qcm = $bdd->prepare('SELECT *
+        FROM patient
+        WHERE patient.id = ?
+        ;');
+        $qcm->execute(array($patient_id));
+        while ($donnees = $qcm->fetch())
+            {
                 echo "<li> <ul>nom : " .$donnees['nom']. "</ul><ul> prénom : " .$donnees['prenom']. " </ul><ul> adresse : " 
                 .$donnees['adresse']. "</ul><ul>code postal : " .$donnees['code_postal']. " </ul><ul>ville : " .$donnees['ville'].
                 " </ul><ul> email : " .$donnees['email']. "</ul><ul> date de naissance : " .$donnees['date_de_naissance'].
