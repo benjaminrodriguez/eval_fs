@@ -81,7 +81,7 @@ $(document).ready(function () {
         <!-- Logo
         ================================================== -->
         <div class="span4 logo">
-        	<a href="index.php"><img src="Public/img/titre.png" width=380 alt="" /></a>
+        	<a href="index.php"><img src="Public/img/titre.png" width=300 alt="" /></a>
             <h5>Gérer votre journée ne sera plus une plaie !</h5>
         </div>
         <?php //var_dump($_SESSION); ?>

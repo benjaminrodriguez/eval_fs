@@ -192,17 +192,18 @@
 
     //-------------------------------------------------------------------------------
 
-    function messages_subject_SELECT($subject_id)
+    function fiche_select($user)
     {
         $bdd = bdd();
         $req= $bdd->prepare('SELECT *
-                                FROM message
-                                INNER JOIN subject ON message.subject_id=subject.id
-                                INNER JOIN user ON subject.user_id=user.id
-                                WHERE subject_id = ?
-                                ORDER BY date ASC;
+                                FROM patient
+                                INNER JOIN events ON events.patient_id=patient.id
+                                INNER JOIN user ON events.user_id=uder.id
+                                ORDER BY date ASC
+                                WHERE events.user_id = ? 
+                                LIMIT 10;
                                 ');
-        $req->execute(array(intval($subject_id)));
+        $req->execute(array(intval($user)));
         $message = $req->fetchAll();
         return $message;
     }
