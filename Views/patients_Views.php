@@ -155,36 +155,7 @@ $(document).ready(function () {
 
              <li><a href="index.php?page=dc">Déconnexion</a></li>
             </div>
-            <!-- HEURE DYNAMIQUE -->
-
-  
-  <script language="JavaScript">
-function heure () {
-var Maintenant = new Date();
-var heures = Maintenant.getHours();
-var minutes = Maintenant.getMinutes();
-var secondes = Maintenant.getSeconds();
-heures = ((heures < 10) ? " 0" : " ") + heures;
-minutes = ((minutes < 10) ? ":0" : ":") + minutes;
-secondes = ((secondes < 10) ? ":0" : ":") + secondes;
-document.formhorloge.horloge.value = heures + minutes + secondes;
-setTimeout("heure()",1000);
-}
-window.onload = heure;
-// 
-</script>
-</head>
-
-<body bgcolor="#FFFFFF">
-
-<br /><p class="tt" ></p><br /><br />
-
-
-<form name="formhorloge">
-<input type="button" class="btn btn-outline-danger" name="horloge" value="">
-</form> 
-    <!-- FIN HEURE DYNAMIQUE -->
-
+          
             
             <!-- Mobile Nav
             ================================================== -->
@@ -242,7 +213,7 @@ window.onload = heure;
     
     <?php if ($_GET['choix'] == 'ajouter_patient') { ?>
 
-    Nouvelle fiche patient
+    <h4>Nouvelle fiche patient</h4>
     <form action="" method="POST">
         <input type="text" name="nom_patient" placeholder="Nom patient"><br>
         <input type="text" name="prenom_patient" placeholder="Prénom patient"><br>
@@ -250,10 +221,10 @@ window.onload = heure;
         <input type="number" name="cp_patient" placeholder="Code postal patient"><br>
         <input type="text" name="ville_patient" placeholder="Ville patient"><br>
         <input type="email" name="email_patient" placeholder="Email patient"><br>
-        Date de naissance patient<br>
+        <h5>Date de naissance patient</h5>
         <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance patient"><br>
         <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone patient"><br>
-        Sexe patient<br>
+        <h5>Sexe patient</h5>
         <input type="radio" name="sexe_patient" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
         <input type="radio" name="sexe_patient" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br>
         <textarea name="mode_de_vie_patient"
@@ -264,12 +235,12 @@ window.onload = heure;
           rows="5" cols="33">
           Alimentation du patient
         </textarea><br>
-        Type de patient<br>
+        <h5>Type de patient</h5>
         <input type="radio" name="type_patient" style="color:black;" value="Adulte" width="10px" class="champ"  id="sexe"> Adulte
         <input type="radio" name="type_patient" style="color:black;" value="Enfant" checked class="champ" id="sexe"> Enfant
         <input type="radio" name="type_patient" style="color:black;" value="Animal" checked class="champ" id="sexe"> Animal<br>
 
-        Responsable patient, laisser vide si patient adulte <br>
+        <!-- Responsable patient, laisser vide si patient adulte <br>
         <input type="text" name="nom_responsable" placeholder="Nom responsable"><br>
         <input type="text" name="prenom_resonsable" placeholder="Prénom responsable"><br>
         <input type="text" name="adresse_patient" placeholder="Adresse responsable"><br>
@@ -281,7 +252,7 @@ window.onload = heure;
         <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone "><br>
         Sexe<br>
         <input type="radio" name="sexe" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
-        <input type="radio" name="sexe" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br>
+        <input type="radio" name="sexe" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br> -->
         
         <button class="btn btn-lg btn-block" name="nouvelle_fiche_patient" type="submit">Ajouter</button>
     </form>
@@ -299,6 +270,7 @@ window.onload = heure;
     if (isset($_GET['id']) && $_GET['choix'] == 'liste_patient') 
     {
         patient_SELECT($_GET['id']);
+        ?> <a href="index.php?page=patients&choix=liste_patient">Retour</a> <?php
     }
 
     // AFFICHE LISTE DE TOUS LES MEDECINS
@@ -310,15 +282,6 @@ window.onload = heure;
     }
    
     ?>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -353,14 +316,43 @@ window.onload = heure;
 
 	<div class="footer-container"><!-- Begin Footer -->
     	<div class="container">
+            
         	<div class="row footer-row">
                 <div class="span3 footer-col">
                     <h5>A propos</h5>
                    <img src="Public/img/titre.png" alt="Piccolo" /><br /><br />
                     <address>
                         <strong>Eval de fin de S2</strong><br />
-                         Benjamin Rodriguez <br />
-                        <br />
+                         Benjamin Rodriguez <br />  <!-- HEURE DYNAMIQUE -->
+
+  
+<script language="JavaScript">
+function heure () {
+var Maintenant = new Date();
+var heures = Maintenant.getHours();
+var minutes = Maintenant.getMinutes();
+var secondes = Maintenant.getSeconds();
+heures = ((heures < 10) ? " 0" : " ") + heures;
+minutes = ((minutes < 10) ? ":0" : ":") + minutes;
+secondes = ((secondes < 10) ? ":0" : ":") + secondes;
+document.formhorloge.horloge.value = heures + minutes + secondes;
+setTimeout("heure()",1000);
+}
+window.onload = heure;
+// 
+</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<p class="tt" ></p>
+
+
+<form name="formhorloge">
+<input type="button" class="btn btn-outline-danger" name="horloge" value="">
+</form> 
+  <!-- FIN HEURE DYNAMIQUE -->
+
                     </address>
                     
                 </div>

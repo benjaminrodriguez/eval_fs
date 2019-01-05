@@ -24,7 +24,7 @@
         $qcm->execute(array());
         while ($donnees = $qcm->fetch())
         {
-            echo "<li>".$donnees['profession']. " prénom : " .$donnees['prenom']. " nom : ".$donnees['nom']. " contact : ".$donnees['email']. "</li>";
+            echo "<li>".$donnees['profession']. " | prénom : " .$donnees['prenom']. " | nom : ".$donnees['nom']. " | contact : <a href='mailto:".$donnees['email']."'>".$donnees['email']."</a> </li>";
         }
         $qcm->closeCursor();
     }
@@ -74,7 +74,7 @@
         $bdd = bdd();
         $qcm = $bdd->prepare('SELECT events.title AS title, events.date AS date, 
                               events.date_debut AS date_debut, events.date_fin AS date_fin, events.description AS description,
-                              user.nom AS nom_medecin, patient.nom AS nom_patient
+                              user.nom AS nom_medecin, patient.nom AS nom_patient, fiche_consultation_id AS fiche_consultation_id
                               FROM events
                               INNER JOIN patient ON patient.id=events.patient_id
                               INNER JOIN user ON user.id=events.user_id
@@ -84,8 +84,32 @@
         while ($donnees = $qcm->fetch())
             {
                 echo "<li>La consultation " .$donnees['title']. "le " .$donnees['date']. 
-                " a eu lieu de " .$donnees['date_debut']." à " .$donnees['date_fin']. " avec le Docteur : " .$donnees['nom_medecin']. " pour le patient " 
-                .$donnees['nom_patient'].", description : " .$donnees['description']."</li>";
+                " a eu lieu de " .$donnees['date_debut']." à " .$donnees['date_fin'].  " pour le patient " 
+                .$donnees['nom_patient'].", description : " .$donnees['description']." <a href='./index.php?page=consultation&choix=liste_consultation&id_consultation=".$donnees['fiche_consultation_id']."'>Voir plus</a></li>";
+            }
+    
+    }
+
+    //-------------------------------------------------------------------------------
+
+    function fiche_consultation_SELECT($fiche_consultation_id)
+    {
+        $bdd = bdd();
+        $qcm = $bdd->prepare('SELECT *
+        FROM fiche_consultation
+        INNER JOIN events ON events.fiche_consultation_id=fiche_consultation.id
+        INNER JOIN user ON user.id=events.user_id
+        WHERE fiche_consultation.id = ?
+        ;');
+        $qcm->execute(array($fiche_consultation_id));
+        while ($donnees = $qcm->fetch())
+            {
+                echo "<li> <ul> Docteur : " .$donnees['nom']. " </ul><ul>Type de consultation : " .$donnees['type_consultation']. "</ul><ul> 
+                Type de pathologie : " .$donnees['type_pathologie']. " </ul><ul> Lieu de consultatin : " 
+                .$donnees['lieu_consultation']. "</ul><ul>Protocole utilisé : " .$donnees['protocole_utilise']. " 
+                </ul><ul>Resultat obtenu : " .$donnees['resultat_obtenu']."</ul>"
+
+                ;
             }
     
     }

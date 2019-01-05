@@ -29,7 +29,7 @@
         nouvelle_consultation_INSERT($_POST['title'], $_POST['date'], $_POST['time_debut'], 
                                      $_POST['time_fin'], $_POST['description'], $_POST['patient'], $_SESSION['id']);
     }
-   
+    
 
     
 

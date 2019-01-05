@@ -188,36 +188,7 @@ $(document).ready(function () {
 
             </ul>
             </div>
-            <!-- HEURE DYNAMIQUE -->
-
-  
-  <script language="JavaScript">
-function heure () {
-var Maintenant = new Date();
-var heures = Maintenant.getHours();
-var minutes = Maintenant.getMinutes();
-var secondes = Maintenant.getSeconds();
-heures = ((heures < 10) ? " 0" : " ") + heures;
-minutes = ((minutes < 10) ? ":0" : ":") + minutes;
-secondes = ((secondes < 10) ? ":0" : ":") + secondes;
-document.formhorloge.horloge.value = heures + minutes + secondes;
-setTimeout("heure()",1000);
-}
-window.onload = heure;
-// 
-</script>
-</head>
-
-<body bgcolor="#FFFFFF">
-
-<br /><p class="tt" ></p><br /><br />
-
-
-<form name="formhorloge">
-<input type="button" class="btn btn-outline-danger" name="horloge" value="">
-</form> 
-    <!-- FIN HEURE DYNAMIQUE -->
-
+           
             
             <!-- Mobile Nav
             ================================================== -->
@@ -309,9 +280,37 @@ window.onload = heure;
                     <h5>A propos</h5>
                    <img src="Public/img/titre.png" alt="Piccolo" /><br /><br />
                     <address>
-                        <strong>Eval de fin de S2</strong><br />
-                         Benjamin Rodriguez <br />
-                        <br />
+                        <strong>Eval de fin de S2</strong>
+                         Benjamin Rodriguez  <!-- HEURE DYNAMIQUE -->
+
+  
+<script language="JavaScript">
+function heure () {
+var Maintenant = new Date();
+var heures = Maintenant.getHours();
+var minutes = Maintenant.getMinutes();
+var secondes = Maintenant.getSeconds();
+heures = ((heures < 10) ? " 0" : " ") + heures;
+minutes = ((minutes < 10) ? ":0" : ":") + minutes;
+secondes = ((secondes < 10) ? ":0" : ":") + secondes;
+document.formhorloge.horloge.value = heures + minutes + secondes;
+setTimeout("heure()",1000);
+}
+window.onload = heure;
+// 
+</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<br /><p class="tt" ></p><br /><br />
+
+
+<form name="formhorloge">
+<input type="button" class="btn btn-outline-danger" name="horloge" value="">
+</form> 
+  <!-- FIN HEURE DYNAMIQUE -->
+
                     </address>
                     
                 </div>

@@ -156,36 +156,7 @@ $(document).ready(function () {
              <li><a href="index.php?page=dc">Déconnexion</a></li>
             </ul>
             </div>
-            <!-- HEURE DYNAMIQUE -->
-
-  
-  <script language="JavaScript">
-function heure () {
-var Maintenant = new Date();
-var heures = Maintenant.getHours();
-var minutes = Maintenant.getMinutes();
-var secondes = Maintenant.getSeconds();
-heures = ((heures < 10) ? " 0" : " ") + heures;
-minutes = ((minutes < 10) ? ":0" : ":") + minutes;
-secondes = ((secondes < 10) ? ":0" : ":") + secondes;
-document.formhorloge.horloge.value = heures + minutes + secondes;
-setTimeout("heure()",1000);
-}
-window.onload = heure;
-// 
-</script>
-</head>
-
-<body bgcolor="#FFFFFF">
-
-<br /><p class="tt" ></p><br /><br />
-
-
-<form name="formhorloge">
-<input type="button" class="btn btn-outline-danger" name="horloge" value="">
-</form> 
-    <!-- FIN HEURE DYNAMIQUE -->
-
+       
             
             <!-- Mobile Nav
             ================================================== -->
@@ -254,10 +225,23 @@ window.onload = heure;
             <button class="btn btn-lg btn-block" name="nouvelle_consultation" type="submit">Créer consultation</button>
         </form>
     <?php } 
-    ?>
-    <?php if ($_GET['choix'] == 'liste_consultation') {
+
+    // AFFICHAGE DE TOUTES LES CONSULTATIONS
+    if ($_GET['choix'] == 'liste_consultation' && !isset($_GET['id_consultation'])) {
+
+        ?> <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Rechercher une consultation ..." /> <?php
+
         liste_consultations_SELECT($_SESSION['id']);
+    } 
+    
+    // AFFICHAGE DE 1 FICHE DE CONSULTATION
+    if ($_GET['choix'] == 'liste_consultation' && isset($_GET['id_consultation']))
+    {
+        fiche_consultation_SELECT($_GET['id_consultation']);
+        ?> <a href="index.php?page=consultation&choix=liste_consultation">Retour</a> 
+<?php
     } ?>
+   
     </div><!-- End Gallery Row -->
     
     <div class="row"><!-- Begin Bottom Section -->
@@ -293,8 +277,37 @@ window.onload = heure;
                    <img src="Public/img/titre.png" alt="Piccolo" /><br /><br />
                     <address>
                         <strong>Eval de fin de S2</strong><br />
-                         Benjamin Rodriguez <br />
-                        <br />
+                         Benjamin Rodriguez 
+                              <!-- HEURE DYNAMIQUE -->
+
+  
+  <script language="JavaScript">
+function heure () {
+var Maintenant = new Date();
+var heures = Maintenant.getHours();
+var minutes = Maintenant.getMinutes();
+var secondes = Maintenant.getSeconds();
+heures = ((heures < 10) ? " 0" : " ") + heures;
+minutes = ((minutes < 10) ? ":0" : ":") + minutes;
+secondes = ((secondes < 10) ? ":0" : ":") + secondes;
+document.formhorloge.horloge.value = heures + minutes + secondes;
+setTimeout("heure()",1000);
+}
+window.onload = heure;
+// 
+</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<br /><p class="tt" ></p><br /><br />
+
+
+<form name="formhorloge">
+<input type="button" class="btn btn-outline-danger" name="horloge" value="">
+</form> 
+    <!-- FIN HEURE DYNAMIQUE -->
+
                     </address>
                     
                 </div>
