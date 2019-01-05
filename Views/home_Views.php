@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="Public/css/flexslider.css" />
 <link rel="stylesheet" href="Public/css/custom-styles.css">
 <link rel="stylesheet" type="text/css" href="/../../Public/css/style_calendar.css" />
+<link rel="stylesheet" type="text/css" href="Public/css/php/calendrier/style.css"/>
+
+
 
 
 <!--[if lt IE 9]>
@@ -66,7 +69,32 @@ $(document).ready(function () {
 });
 
 </script>
+<!-- CALENDRIER -->
 
+<link rel="stylesheet" type="text/css" href="Controlers/php/calendrier/style.css"/>
+        <link rel="stylesheet" type="text/css" href="./Controlers/php/calendrier/style_calendrier.css"/>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function($){
+               $('.month').hide();
+               $('.month:first').show();
+               $('.months a:first').addClass('active');
+               var current = 1;
+               $('.months a').click(function(){
+                    var month = $(this).attr('id').replace('linkMonth','');
+                    if(month != current){
+                        $('#month'+current).slideUp();
+                        $('#month'+month).slideDown();
+                        $('.months a').removeClass('active'); 
+                        $('.months a#linkMonth'+month).addClass('active'); 
+                        current = month;
+                    }
+                    return false; 
+               });
+            });
+        </script>
+<!-- FIN CALENDRIER -->
 </head>
 
 <body class="home">
@@ -147,7 +175,7 @@ $(document).ready(function () {
              <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=consultation">Gestion des consultations <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="index.php?page=consultation&choix=liste_consultation">Liste des consultations</a></li>
+                    <li><a href="index.php?page=consultation&choix=liste_consultation">Toutes mes consultations</a></li>
                     <li><a href="index.php?page=consultation&choix=nouvelle_consultation">Nouvelle consultation</a></li>
                     <li><a href="index.php?page=consultation&choix=liste_protocole">Liste des protocoles</a></li>
                     <li><a href="index.php?page=consultation&choix=nouveau_protocole">Nouveau protocole</a></li>
@@ -242,7 +270,7 @@ window.onload = heure;
     
     </div>
     <!-- CALENDRIER -->
-    <div><?php require(dirname(__FILE__).'/../Controllers/php/calendrier/index.php'); ?></div>
+    <div><?php require(dirname(__FILE__).'/../Controllers/php/calendrier/index_calendrier.php'); ?></div>
     <div>
     <!-- FIN CALENDRIER --> 
     </div><!-- End Gallery Row -->

@@ -238,7 +238,10 @@ window.onload = heure;
     <div class="row headline"><!-- Begin Headline -->
     
     </div>
+
+    
     <?php if ($_GET['choix'] == 'ajouter_patient') { ?>
+
     Nouvelle fiche patient
     <form action="" method="POST">
         <input type="text" name="nom_patient" placeholder="Nom patient"><br>
@@ -284,11 +287,15 @@ window.onload = heure;
     </form>
     <?php } 
     if ($_GET['choix'] == 'liste_patient') 
-    { 
+    { ?>
+    <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un patient ..." />
+    <?php 
         liste_patient_SELECT();
     }
     if ($_GET['choix'] == 'liste_medecin') 
-    { 
+    { ?>
+    <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un médecin ..." />
+    <?php
         medecin_SELECT();
     }
    

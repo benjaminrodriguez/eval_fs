@@ -255,6 +255,9 @@ window.onload = heure;
         </form>
     <?php } 
     ?>
+    <?php if ($_GET['choix'] == 'liste_consultation') {
+        liste_consultations_SELECT($_SESSION['id']);
+    } ?>
     </div><!-- End Gallery Row -->
     
     <div class="row"><!-- Begin Bottom Section -->

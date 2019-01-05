@@ -36,7 +36,7 @@
                                $_POST['mode_de_vie_patient'], $_POST['alimentation_patient'], $_POST['type_patient']);
     }
     
-
+    
     
 
 
