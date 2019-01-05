@@ -132,11 +132,9 @@ $(document).ready(function () {
              </li>-->
 
 
-
             <li><a href="index.php?page=fiches">Mes fiches</a></li>
 
              <li><a href="index.php?page=patients">Mes patients</a></li>
-
 
              <li><a href="index.php?page=dc">Déconnexion</a></li>
 
@@ -226,7 +224,7 @@ window.onload = heure;
     
     </div>
     <!-- CALENDRIER -->
-    <div><?php require(dirname(__FILE__).'/../Controllers/php/calendrier/index.php'); ?></div>
+PATIENTS
     <div>
     <!-- FIN CALENDRIER --> 
     </div><!-- End Gallery Row -->
@@ -290,8 +288,6 @@ window.onload = heure;
                             <a href="index.php?page=home">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                             <a href="index.php?page=fiches">Mes fiches</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                             <a href="index.php?page=patients">Mes patients</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                            <a href="index.php?page=forum">3</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                            <a href="index.php?page=store">4</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                             <a href="index.php?page=dc"> Déconnexion</a>
                             </span>
                         </div>

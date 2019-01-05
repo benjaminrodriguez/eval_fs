@@ -16,7 +16,7 @@
 
         $title = 'Accueil';
         $section = 'Accueil';
-        require(dirname(__FILE__).'/../Views/home_Views.php');
+        require(dirname(__FILE__).'/../Views/fiches_Views.php');
     }
     else if ($_POST['menu'] === 'fiche')
     {

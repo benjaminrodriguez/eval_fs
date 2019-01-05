@@ -32,15 +32,15 @@
             //home();
             require_once('Controllers/home_Controllers.php');
         }
-        else if ($_GET['page'] == 'profile')
+        else if ($_GET['page'] == 'fiches')
         {
             //my_profile();
-            require_once('Controllers/profile_Controllers.php');
+            require_once('Controllers/fiches_Controllers.php');
         }        
-        else if ($_GET['page'] == 'store')
+        else if ($_GET['page'] == 'patients')
         {
             //cards_store();
-            require_once('Controllers/store_Controllers.php');
+            require_once('Controllers/patients_Controllers.php');
         }
         else if ($_GET['page'] == 'forum')
         {

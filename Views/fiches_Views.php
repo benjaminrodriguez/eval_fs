@@ -132,11 +132,9 @@ $(document).ready(function () {
              </li>-->
 
 
-
             <li><a href="index.php?page=fiches">Mes fiches</a></li>
 
              <li><a href="index.php?page=patients">Mes patients</a></li>
-
 
              <li><a href="index.php?page=dc">Déconnexion</a></li>
 
@@ -225,10 +223,7 @@ window.onload = heure;
     <div class="row headline"><!-- Begin Headline -->
     
     </div>
-    <!-- CALENDRIER -->
-    <div><?php require(dirname(__FILE__).'/../Controllers/php/calendrier/index.php'); ?></div>
-    <div>
-    <!-- FIN CALENDRIER --> 
+    FICHES
     </div><!-- End Gallery Row -->
     
     <div class="row"><!-- Begin Bottom Section -->

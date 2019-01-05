@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Calendrier</title>
-        <link rel="stylesheet" type="text/css" href="/../../Public/css/style_calendar.css" />
-        <link rel="stylesheet" type="text/css" href="/style.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
         <script type="text/javascript">
             jQuery(function($){
@@ -25,6 +24,7 @@
                });
             });
         </script>
+        
     </head>
     <body>
         <?php
