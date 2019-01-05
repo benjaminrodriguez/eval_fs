@@ -133,10 +133,26 @@ $(document).ready(function () {
 
 
 
-            <li><a href="index.php?page=fiches">Mes fiches</a></li>
+             </li>
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=patients">Gestion des patients <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?page=patients&choix=liste_patient">Liste des patients</a></li>
+                    <li><a href="index.php?page=patients&choix=ajouter_patient">Ajouter un patient</a></li>
+                    <li><a href="index.php?page=patients&choix=liste_medecin">Liste des médecins</a></li>
+                </ul>
+             </li>
 
-             <li><a href="index.php?page=patients">Mes patients</a></li>
-
+             </li>
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=consultation">Gestion des consultations <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?page=consultation&choix=liste_consultation">Liste des consultations</a></li>
+                    <li><a href="index.php?page=consultation&choix=nouvelle_consultation">Nouvelle consultation</a></li>
+                    <li><a href="index.php?page=consultation&choix=liste_protocole">Liste des protocoles</a></li>
+                    <li><a href="index.php?page=consultation&choix=nouveau_protocole">Nouveau protocole</a></li>
+                </ul>
+             </li>
 
              <li><a href="index.php?page=dc">Déconnexion</a></li>
 

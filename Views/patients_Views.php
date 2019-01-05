@@ -132,13 +132,28 @@ $(document).ready(function () {
              </li>-->
 
 
-            <li><a href="index.php?page=fiches">Mes fiches</a></li>
+             </li>
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=patients">Gestion des patients <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?page=patients&choix=liste_patient">Liste des patients</a></li>
+                    <li><a href="index.php?page=patients&choix=ajouter_patient">Ajouter un patient</a></li>
+                    <li><a href="index.php?page=patients&choix=liste_medecin">Liste des médecins</a></li>
+                </ul>
+             </li>
 
-             <li><a href="index.php?page=patients">Mes patients</a></li>
+             </li>
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=consultation">Gestion des consultations <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?page=consultation&choix=liste_consultation">Liste des consultations</a></li>
+                    <li><a href="index.php?page=consultation&choix=nouvelle_consultation">Nouvelle consultation</a></li>
+                    <li><a href="index.php?page=consultation&choix=liste_protocole">Liste des protocoles</a></li>
+                    <li><a href="index.php?page=consultation&choix=nouveau_protocole">Nouveau protocole</a></li>
+                </ul>
+             </li>
 
              <li><a href="index.php?page=dc">Déconnexion</a></li>
-
-            </ul>
             </div>
             <!-- HEURE DYNAMIQUE -->
 
@@ -223,8 +238,73 @@ window.onload = heure;
     <div class="row headline"><!-- Begin Headline -->
     
     </div>
-    <!-- CALENDRIER -->
-PATIENTS
+    <?php if ($_GET['choix'] == 'ajouter_patient') { ?>
+    Nouvelle fiche patient
+    <form action="" method="POST">
+        <input type="text" name="nom_patient" placeholder="Nom patient"><br>
+        <input type="text" name="prenom_patient" placeholder="Prénom patient"><br>
+        <input type="text" name="adresse_patient" placeholder="Adresse patient"><br>
+        <input type="number" name="cp_patient" placeholder="Code postal patient"><br>
+        <input type="text" name="ville_patient" placeholder="Ville patient"><br>
+        <input type="email" name="email_patient" placeholder="Email patient"><br>
+        Date de naissance patient<br>
+        <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance patient"><br>
+        <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone patient"><br>
+        Sexe patient<br>
+        <input type="radio" name="sexe_patient" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
+        <input type="radio" name="sexe_patient" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br>
+        <textarea name="mode_de_vie_patient"
+          rows="5" cols="33">
+            Mode de vie du patient
+        </textarea><br>
+        <textarea name="alimentation_patient"
+          rows="5" cols="33">
+          Alimentation du patient
+        </textarea><br>
+        Type de patient<br>
+        <input type="radio" name="type_patient" style="color:black;" value="Adulte" width="10px" class="champ"  id="sexe"> Adulte
+        <input type="radio" name="type_patient" style="color:black;" value="Enfant" checked class="champ" id="sexe"> Enfant
+        <input type="radio" name="type_patient" style="color:black;" value="Animal" checked class="champ" id="sexe"> Animal<br>
+
+        Responsable patient, laisser vide si patient adulte <br>
+        <input type="text" name="nom_responsable" placeholder="Nom responsable"><br>
+        <input type="text" name="prenom_resonsable" placeholder="Prénom responsable"><br>
+        <input type="text" name="adresse_patient" placeholder="Adresse responsable"><br>
+        <input type="number" name="cp_patient" placeholder="Code postal responsable"><br>
+        <input type="text" name="ville_patient" placeholder="Ville responsable"><br>
+        <input type="email" name="email_patient" placeholder="Email responsable"><br>
+        Date de naissance<br>
+        <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance"><br>
+        <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone "><br>
+        Sexe<br>
+        <input type="radio" name="sexe" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
+        <input type="radio" name="sexe" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br>
+        
+        <button class="btn btn-lg btn-block" name="nouvelle_fiche_patient" type="submit">Ajouter</button>
+    </form>
+    <?php } 
+    if ($_GET['choix'] == 'liste_patient') 
+    { 
+        liste_patient_SELECT();
+    }
+    if ($_GET['choix'] == 'liste_medecin') 
+    { 
+        medecin_SELECT();
+    }
+   
+    ?>
+
+
+
+
+
+
+
+
+
+
+
+
     <div>
     <!-- FIN CALENDRIER --> 
     </div><!-- End Gallery Row -->

@@ -32,39 +32,15 @@
             //home();
             require_once('Controllers/home_Controllers.php');
         }
-        else if ($_GET['page'] == 'fiches')
+        else if ($_GET['page'] == 'consultation')
         {
             //my_profile();
-            require_once('Controllers/fiches_Controllers.php');
+            require_once('Controllers/consultation_Controllers.php');
         }        
         else if ($_GET['page'] == 'patients')
         {
             //cards_store();
             require_once('Controllers/patients_Controllers.php');
-        }
-        else if ($_GET['page'] == 'forum')
-        {
-            //forum();
-            require_once('Controllers/forum_Controllers.php');
-        }
-        else if ($_GET['page'] == 'inventory')
-        {
-            //my_inventory();
-            require_once('Controllers/inventory_Controllers.php');
-        }
-        else if ($_GET['page'] == 'game')
-        {
-            //game1();
-            require_once('Controllers/game_Controllers.php');
-        }
-        else if ($_GET['page'] == 'game2')
-        {
-            //game1();
-            require_once('Controllers/game2_Controllers.php');
-        }
-        else if ($_GET['page'] == 'message')
-        {
-            //message();
         }
         else
         {

@@ -132,12 +132,28 @@ $(document).ready(function () {
              </li>-->
 
 
-            <li><a href="index.php?page=fiches">Mes fiches</a></li>
+             </li>
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=patients">Gestion des patients <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?page=patients&choix=liste_patient">Liste des patients</a></li>
+                    <li><a href="index.php?page=patients&choix=ajouter_patient">Ajouter un patient</a></li>
+                    <li><a href="index.php?page=patients&choix=liste_medecin">Liste des médecins</a></li>
+                </ul>
+             </li>
 
-             <li><a href="index.php?page=patients">Mes patients</a></li>
+             </li>
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="index.php?page=consultation">Gestion des consultations <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?page=consultation&choix=liste_consultation">Liste des consultations</a></li>
+                    <li><a href="index.php?page=consultation&choix=nouvelle_consultation">Nouvelle consultation</a></li>
+                    <li><a href="index.php?page=consultation&choix=liste_protocole">Liste des protocoles</a></li>
+                    <li><a href="index.php?page=consultation&choix=nouveau_protocole">Nouveau protocole</a></li>
+                </ul>
+             </li>
 
              <li><a href="index.php?page=dc">Déconnexion</a></li>
-
             </ul>
             </div>
             <!-- HEURE DYNAMIQUE -->
@@ -223,7 +239,22 @@ window.onload = heure;
     <div class="row headline"><!-- Begin Headline -->
     
     </div>
-    FICHES
+    
+    <?php if ($_GET['choix'] == 'nouvelle_consultation') 
+    { ?>
+        <form action="" method="POST">
+            <input type="text" name="title" placeholder="Titre"><br>
+            Date du rendez-vous <input type="date" name="date" placeholder="Date"><br>
+            Heure de début <input type="time" name="time_debut" placeholder="Heure de début"><br>
+            Heure de fin <input type="time" name="time_fin" placeholder="Heure de fin"><br>
+            <textarea name="description"
+                rows="5" cols="33">Description            
+            </textarea><br>
+            <input type="text" name="patient" placeholder="Nom du patient"><br>
+            <button class="btn btn-lg btn-block" name="nouvelle_consultation" type="submit">Créer consultation</button>
+        </form>
+    <?php } 
+    ?>
     </div><!-- End Gallery Row -->
     
     <div class="row"><!-- Begin Bottom Section -->

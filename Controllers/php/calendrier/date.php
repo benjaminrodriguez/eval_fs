@@ -5,7 +5,7 @@ class Date{
     var $months     = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
 
     function getEvents($year){
-        global $bdd;
+        $bdd = bdd();
         $req = $bdd->query('SELECT id,title,date FROM events WHERE YEAR(date)='.$year);
         $r = array();
         /**

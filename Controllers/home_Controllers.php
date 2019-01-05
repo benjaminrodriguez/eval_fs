@@ -12,7 +12,6 @@
     
     if (!isset($_POST['menu']))
     {
-        $datas = last_deck_play_SELECT($_SESSION['id']);
 
         $title = 'Accueil';
         $section = 'Accueil';
