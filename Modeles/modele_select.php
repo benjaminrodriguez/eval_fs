@@ -73,7 +73,7 @@
     {
         $bdd = bdd();
         $qcm = $bdd->prepare('SELECT events.title AS title, events.date AS date, 
-                              events.date_debut AS date_debut, events.date_fin AS date_fin, events.description AS description,
+                              events.start_event AS date_debut, events.end_event AS date_fin, events.description AS description,
                               user.nom AS nom_medecin, patient.nom AS nom_patient, fiche_consultation_id AS fiche_consultation_id
                               FROM events
                               INNER JOIN patient ON patient.id=events.patient_id

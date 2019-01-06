@@ -27,7 +27,7 @@
             $data = connection_SELECT($_POST['email']);
             sleep(1);
 
-            if (password_verify($_POST['password'], $data['password']))
+            if ($_POST['password'] == $data['password'])
             { 
                 // ON DETRUIT LE POST PASSWORD
                 unset($_POST['password']);

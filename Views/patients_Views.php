@@ -215,44 +215,44 @@ $(document).ready(function () {
 
     <h4>Nouvelle fiche patient</h4>
     <form action="" method="POST">
-        <input type="text" name="nom_patient" placeholder="Nom patient"><br>
-        <input type="text" name="prenom_patient" placeholder="Prénom patient"><br>
-        <input type="text" name="adresse_patient" placeholder="Adresse patient"><br>
-        <input type="number" name="cp_patient" placeholder="Code postal patient"><br>
-        <input type="text" name="ville_patient" placeholder="Ville patient"><br>
-        <input type="email" name="email_patient" placeholder="Email patient"><br>
+        <input type="text" name="nom_patient" placeholder="Nom patient" required><br>
+        <input type="text" name="prenom_patient" placeholder="Prénom patient" required><br>
+        <input type="text" name="adresse_patient" placeholder="Adresse patient" required><br>
+        <input type="number" name="cp_patient" placeholder="Code postal patient" required><br>
+        <input type="text" name="ville_patient" placeholder="Ville patient" required><br>
+        <input type="email" name="email_patient" placeholder="Email patient" required><br>
         <h5>Date de naissance patient</h5>
-        <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance patient"><br>
-        <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone patient"><br>
+        <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance patient" required><br>
+        <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone patient" required><br>
         <h5>Sexe patient</h5>
-        <input type="radio" name="sexe_patient" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
-        <input type="radio" name="sexe_patient" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br>
+        <input type="radio" name="sexe_patient" style="color:black;" value="homme" width="10px" class="champ"  id="sexe" required> Homme
+        <input type="radio" name="sexe_patient" style="color:black;" value="femme" checked class="champ" id="sexe" required> Femme<br>
         <textarea name="mode_de_vie_patient"
-          rows="5" cols="33">
+          rows="5" cols="33" required>
             Mode de vie du patient
         </textarea><br>
         <textarea name="alimentation_patient"
-          rows="5" cols="33">
+          rows="5" cols="33" required>
           Alimentation du patient
         </textarea><br>
         <h5>Type de patient</h5>
-        <input type="radio" name="type_patient" style="color:black;" value="Adulte" width="10px" class="champ"  id="sexe"> Adulte
-        <input type="radio" name="type_patient" style="color:black;" value="Enfant" checked class="champ" id="sexe"> Enfant
-        <input type="radio" name="type_patient" style="color:black;" value="Animal" checked class="champ" id="sexe"> Animal<br>
+        <input type="radio" name="type_patient" style="color:black;" value="Adulte" width="10px" class="champ"  id="sexe" required> Adulte
+        <input type="radio" name="type_patient" style="color:black;" value="Enfant" checked class="champ" id="sexe" required> Enfant
+        <input type="radio" name="type_patient" style="color:black;" value="Animal" checked class="champ" id="sexe" required> Animal<br>
 
-        <!-- Responsable patient, laisser vide si patient adulte <br>
+        <div color: red><h5 >Responsable patient, laisser vide si patient adulte  </h5></div><br>
         <input type="text" name="nom_responsable" placeholder="Nom responsable"><br>
-        <input type="text" name="prenom_resonsable" placeholder="Prénom responsable"><br>
-        <input type="text" name="adresse_patient" placeholder="Adresse responsable"><br>
-        <input type="number" name="cp_patient" placeholder="Code postal responsable"><br>
-        <input type="text" name="ville_patient" placeholder="Ville responsable"><br>
-        <input type="email" name="email_patient" placeholder="Email responsable"><br>
+        <input type="text" name="prenom_responsable" placeholder="Prénom responsable"><br>
+        <input type="text" name="adresse_responsable" placeholder="Adresse responsable"><br>
+        <input type="number" name="cp_responsable" placeholder="Code postal responsable"><br>
+        <input type="text" name="ville_responsable" placeholder="Ville responsable"><br>
+        <input type="email" name="email_responsable" placeholder="Email responsable"><br>
         Date de naissance<br>
-        <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance"><br>
-        <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone "><br>
+        <input type="date" name="date_de_naissance_responsable" placeholder="Date de naissance"><br>
+        <input type="tel" name="telephone_responsable" placeholder="Numéro de téléphone "><br>
         Sexe<br>
-        <input type="radio" name="sexe" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
-        <input type="radio" name="sexe" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br> -->
+        <input type="radio" name="sexe_responsable" style="color:black;" value="homme" width="10px" class="champ"  id="sexe"> Homme
+        <input type="radio" name="sexe_responsable" style="color:black;" value="femme" checked class="champ" id="sexe"> Femme<br>
         
         <button class="btn btn-lg btn-block" name="nouvelle_fiche_patient" type="submit">Ajouter</button>
     </form>
@@ -269,8 +269,14 @@ $(document).ready(function () {
     // AFFICHE FICHE 1 PATIENT
     if (isset($_GET['id']) && $_GET['choix'] == 'liste_patient') 
     {
+        $_SESSION['id_patient'] = $_GET['id'];
+        var_dump($_SESSION);
         patient_SELECT($_GET['id']);
-        ?> <a href="index.php?page=patients&choix=liste_patient">Retour</a> <?php
+        ?> <a href="index.php?page=patients&choix=liste_patient">Retour</a> 
+        <a href="index.php?page=patients&choix=modif&id=<?= $_SESSION['id_patient'] ?>">Modifier fiche patient</a>
+        <a href="index.php?page=patients&choix=delete&id=<?= $_SESSION['id_patient'] ?>">Supprimer fiche patient</a>
+
+        <?php
     }
 
     // AFFICHE LISTE DE TOUS LES MEDECINS
@@ -280,6 +286,41 @@ $(document).ready(function () {
     <?php
         medecin_SELECT();
     }
+
+    if ($_GET['choix'] == 'modif' && isset ($_SESSION['id_patient']))
+    { ?>
+        <h4>Modifier fiche patient</h4>
+    <form action="" method="POST">
+        <input type="text" name="nom_patient" placeholder="Nom patient" required><br>
+        <input type="text" name="prenom_patient" placeholder="Prénom patient" required><br>
+        <input type="text" name="adresse_patient" placeholder="Adresse patient" required><br>
+        <input type="number" name="cp_patient" placeholder="Code postal patient" required><br>
+        <input type="text" name="ville_patient" placeholder="Ville patient" required><br>
+        <input type="email" name="email_patient" placeholder="Email patient" required><br>
+        <h5>Date de naissance patient</h5>
+        <input type="date" name="date_de_naissance_patient" placeholder="Date de naissance patient" required><br>
+        <input type="tel" name="telephone_patient" placeholder="Numéro de téléphone patient" required><br>
+        <h5>Sexe patient</h5>
+        <input type="radio" name="sexe_patient" style="color:black;" value="homme" width="10px" class="champ"  id="sexe" required> Homme
+        <input type="radio" name="sexe_patient" style="color:black;" value="femme" checked class="champ" id="sexe" required> Femme<br>
+        <textarea name="mode_de_vie_patient"
+          rows="5" cols="33" required>
+            Mode de vie du patient
+        </textarea><br>
+        <textarea name="alimentation_patient"
+          rows="5" cols="33" required>
+          Alimentation du patient
+        </textarea><br>
+        <h5>Type de patient</h5>
+        <input type="radio" name="type_patient" style="color:black;" value="Adulte" width="10px" class="champ"  id="sexe" required> Adulte
+        <input type="radio" name="type_patient" style="color:black;" value="Enfant" checked class="champ" id="sexe" required> Enfant
+        <input type="radio" name="type_patient" style="color:black;" value="Animal" checked class="champ" id="sexe" required> Animal<br>
+
+        
+        
+        <button class="btn btn-lg btn-block" name="nouvelle_fiche_patient" type="submit">Mettre à jour</button>
+    </form>
+   <?php }
    
     ?>
 

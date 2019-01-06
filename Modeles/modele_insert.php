@@ -26,6 +26,18 @@
     }
     // ----------------------------------------------------------------------------
 
+    function ajouter_responsable_INSERT ($nom, $prenom, $adresse, $code_postal, $ville, $email, $date_de_naissance, $telephone, $sexe)
+    {
+        $bdd = bdd();
+        // INSCRIPTION
+        $inscription = $bdd->prepare(
+        'INSERT INTO responsable (nom, prenom, adresse, code_postal, ville, email, date_de_naissance, telephone, sexe, patient_id) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, LAST_INSERT_ID());
+        ');
+        $inscription->execute(array($nom, $prenom, $adresse, $code_postal, $ville, $email, $date_de_naissance, $telephone, $sexe));
+    }
+    // ----------------------------------------------------------------------------
+
     function nouvelle_fiche_consultation_INSERT ($type_consultation, $type_pathologie, $lieu_consultation, $protocole_utilise, $resultat_obtenu)
     {
         $bdd = bdd();

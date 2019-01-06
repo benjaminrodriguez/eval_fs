@@ -1,62 +1,118 @@
-        <?php
-        require(dirname(__FILE__).'/date.php');
-        $date = new Date();
-        $year = date('Y');
-        $events = $date->getEvents($year);
-        $dates = $date->getAll($year);
-        ?>
-        <div class="periods">
-            <div class="year"><?php echo $year; ?></div>
-            <div class="months">
-                <ul>
-                    <?php foreach ($date->months as $id=>$m): ?>
-                         <li><a href="#" id="linkMonth<?php echo $id+1; ?>"><?php echo utf8_encode(substr(utf8_decode($m),0,3)); ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <div class="clear"></div>
-            <?php $dates = current($dates); ?>
-            <?php foreach ($dates as $m=>$days): ?>
-               <div class="month relative" id="month<?php echo $m; ?>">
-               <table>
-                   <thead>
-                       <tr>
-                           <?php foreach ($date->days as $d): ?>
-                                <th><?php echo substr($d,0,3); ?></th>
-                           <?php endforeach; ?>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       <tr>
-                       <?php $end = end($days); foreach($days as $d=>$w): ?>
-                           <?php $time = strtotime("$year-$m-$d"); ?>
-                           <?php if($d == 1 && $w != 1): ?>
-                                <td colspan="<?php echo $w-1; ?>" class="padding"></td>
-                           <?php endif; ?>
-                           <td<?php if($time == strtotime(date('Y-m-d'))): ?> class="today" <?php endif; ?>>
-                                <div class="relative">
-                                    <div class="day"><?php echo $d; ?></div>
-                                </div>
-                               <div class="daytitle">
-                                   <?php echo $date->days[$w-1]; ?> <?php echo $d; ?>  <?php echo $date->months[$m-1]; ?>
-                               </div>
-                               <ul class="events">
-                                   <?php if(isset($events[$time])): foreach($events[$time] as $e): ?>
-                                        <li><?php echo $e; ?></li>
-                                   <?php endforeach; endif;  ?>
-                               </ul>
-                           </td>
-                           <?php if($w == 7): ?>
-                            </tr><tr>
-                           <?php endif; ?>
-                       <?php endforeach; ?>
-                       <?php if($end != 7): ?>
-                            <td colspan="<?php echo 7-$end; ?>" class="padding"></td>
-                       <?php endif; ?>
-                       </tr>
-                   </tbody>
-               </table>
-               </div>
-            <?php endforeach; ?>
-        </div>
-        <div class="clear"></div>
+<?php
+//index.php
+
+
+
+
+?>
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Jquery Fullcalandar Integration with PHP and Mysql</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale/fr.js'></script>
+  <script>
+
+  $(document).ready(function() {
+   var calendar = $('#calendar').fullCalendar({
+    editable:true,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+    events: 'load.php',
+    selectable:true,
+    selectHelper:true,
+    select: function(start, end, allDay)
+    {
+     var title = prompt("Entrer le titre de votre évènement");
+     if(title)
+     {
+      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+      $.ajax({
+       url:"insert.php",
+       type:"POST",
+       data:{title:title, start:start, end:end},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Evenement ajouté");
+       }
+      })
+     }
+    },
+    editable:true,
+    eventResize:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      url:"update.php",
+      type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function(){
+       calendar.fullCalendar('refetchEvents');
+       alert('Evenement mis à jour');
+      }
+     })
+    },
+
+    eventDrop:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      url:"update.php",
+      type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function()
+      {
+       calendar.fullCalendar('refetchEvents');
+       alert("Evenement mis à jour");
+      }
+     });
+    },
+
+    eventClick:function(event)
+    {
+     if(confirm("Voulez vous vraiment le supprimer ? "))
+     {
+      var id = event.id;
+      $.ajax({
+       url:"delete.php",
+       type:"POST",
+       data:{id:id},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Evenement supprimé");
+       }
+      })
+     }
+    },
+
+   });
+  });
+
+  </script>
+ </head>
+ <body>
+  <br />
+  <h2 align="center">Calendrier</h2>
+  <br />
+  <div class="container">
+   <div id="calendar"></div>
+  </div>
+ </body>
+</html>
