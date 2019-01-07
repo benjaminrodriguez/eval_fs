@@ -214,9 +214,9 @@ $(document).ready(function () {
     <?php if ($_GET['choix'] == 'nouvelle_consultation') 
     { ?>
         <form action="" method="POST">
-            <input type="text" name="title" placeholder="Titre"><br>
-            Date du rendez-vous <input type="date" name="date" placeholder="Date"><br>
-            Heure de début <input type="time" name="time_debut" placeholder="Heure de début"><br>
+            <input type="text" name="title" placeholder="Titre" required><br>
+            Date du rendez-vous <input type="date" name="date" placeholder="Date" required><br>
+            Heure de début <input type="time" name="time_debut" placeholder="Heure de début"  required><br>
             Heure de fin <input type="time" name="time_fin" placeholder="Heure de fin"><br>
             <textarea name="description"
                 rows="5" cols="33">Description            
@@ -229,9 +229,23 @@ $(document).ready(function () {
     // AFFICHAGE DE TOUTES LES CONSULTATIONS
     if ($_GET['choix'] == 'liste_consultation' && !isset($_GET['id_consultation'])) {
 
-        ?> <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Rechercher une consultation ..." /> <?php
-
+        ?> 
+        <form method="POST">
+            <!-- <input type="text" name="texte" id="search" class="form-control" placeholder="Rechercher une consultation..." /> -->
+        </form>
+   <?php 
+    if (isset($_POST['texte'])) {
+        getSearch_consultation($_POST['texte']);
+        ?> <a href="index.php?page=consultation&choix=liste_consultation">Retour</a> <?php
+    }
+    else {
         liste_consultations_SELECT($_SESSION['id']);
+        ?> <a href="index.php?page=consultation&choix=liste_consultation">Retour</a> <?php
+
+    } ?>
+<?php
+
+        //liste_consultations_SELECT($_SESSION['id']);
     } 
     
     // AFFICHAGE DE 1 FICHE DE CONSULTATION
@@ -239,8 +253,21 @@ $(document).ready(function () {
     {
         fiche_consultation_SELECT($_GET['id_consultation']);
         ?> <a href="index.php?page=consultation&choix=liste_consultation">Retour</a> 
+        <a href="index.php?page=consultation&choix=delete_fiche_consultation&id_consultation=<?= $_GET['id_consultation'] ?>">Supprimer fiche consultation</a> 
+
 <?php
-    } ?>
+    } 
+    if ($_GET['choix'] == 'delete_fiche_consultation' && isset($_GET['id_consultation']))
+    {
+
+        // DELETE EVENTS FICHE CONSULTATION
+        fiche_consultation_event_delete($_GET['id_consultation']);
+
+        // DELETE FICHE CONSULTATION
+        fiche_consultation_delete($_GET['id_consultation']);
+    } 
+    
+    ?>
    
     </div><!-- End Gallery Row -->
     

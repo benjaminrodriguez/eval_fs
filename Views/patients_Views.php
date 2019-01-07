@@ -70,6 +70,34 @@ $(document).ready(function () {
 </head>
 
 <body class="home">
+<script>
+    $(document).ready(function() {
+    // RECHERCHE DAN LES TABLEAU
+    $("#search").keyup(function() {
+        search_table($(this).val());
+    });
+    function search_table(value) {
+        $("#patient-table tr").each(function() {
+        var found = "false";
+        $(this).each(function() {
+            if (
+            $(this)
+                .text()
+                .toLowerCase()
+                .indexOf(value.toLowerCase()) >= 0
+            ) {
+            found = "true";
+            }
+        });
+        if (found == "true") {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+        });
+    }
+    });
+</script>
     <!-- Color Bars (above header)-->
 	<div class="color-bar-1"></div>
     <div class="color-bar-2 color-bg"></div>
@@ -261,16 +289,27 @@ $(document).ready(function () {
     // AFFICHE TOUS LES PATIENTS 
     if ($_GET['choix'] == 'liste_patient' && !isset($_GET['id'])) 
     { ?>
-    <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un patient ..." />
-    <?php 
-        liste_patient_SELECT();
+    <form method="POST">
+        <input type="text" name="texte" id="search" class="form-control" placeholder="Rechercher un patient..." />
+    </form>
+       <?php 
+        //getSearch($_POST['search']);
+        if (isset($_POST['texte'])) {
+            getSearch_patient($_POST['texte']);
+            ?> <a href="index.php?page=patients&choix=liste_patient">Retour</a> <?php
+        }
+        else {
+            liste_patient_SELECT();
+            ?> <a href="index.php?page=patients&choix=liste_patient">Retour</a> <?php
+
+        }
     }
 
     // AFFICHE FICHE 1 PATIENT
     if (isset($_GET['id']) && $_GET['choix'] == 'liste_patient') 
     {
         $_SESSION['id_patient'] = $_GET['id'];
-        var_dump($_SESSION);
+        //var_dump($_SESSION);
         patient_SELECT($_GET['id']);
         ?> <a href="index.php?page=patients&choix=liste_patient">Retour</a> 
         <a href="index.php?page=patients&choix=modif&id=<?= $_SESSION['id_patient'] ?>">Modifier fiche patient</a>
@@ -282,9 +321,21 @@ $(document).ready(function () {
     // AFFICHE LISTE DE TOUS LES MEDECINS
     if ($_GET['choix'] == 'liste_medecin') 
     { ?>
-    <input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un médecin ..." />
+        <form method="POST">
+            <input type="text" name="texte" id="search" class="form-control" placeholder="Rechercher un médecin..." />
+        </form>
+       <?php 
+        if (isset($_POST['texte'])) {
+            getSearch_medecin($_POST['texte']);
+            ?> <a href="index.php?page=patients&choix=liste_medecin">Retour</a> <?php
+        }
+        else {
+            medecin_SELECT();
+            ?> <a href="index.php?page=patients&choix=liste_medecin">Retour</a> <?php
+
+        } ?>
+
     <?php
-        medecin_SELECT();
     }
 
     if ($_GET['choix'] == 'modif' && isset ($_SESSION['id_patient']))

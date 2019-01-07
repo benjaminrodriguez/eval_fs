@@ -1,14 +1,13 @@
 <?php
 
 //load.php
-
-$connect = new PDO('mysql:host=localhost;dbname=eval_fin', 'root', 'toor');
+$bdd = bdd();
 
 $data = array();
 
 $query = "SELECT * FROM events ORDER BY id";
 
-$statement = $connect->prepare($query);
+$statement = $bdd->prepare($query);
 
 $statement->execute();
 
@@ -19,8 +18,8 @@ foreach($result as $row)
  $data[] = array(
   'id'   => $row["id"],
   'title'   => $row["title"],
-  'start'   => $row["start_event"],
-  'end'   => $row["end_event"]
+  'start'   => $row["start"],
+  'end'   => $row["end"]
  );
 }
 

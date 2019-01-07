@@ -73,30 +73,103 @@ $(document).ready(function () {
 </script>
 <!-- CALENDRIER -->
 
-<link rel="stylesheet" type="text/css" href="Controlers/php/calendrier/style.css"/>
-        <link rel="stylesheet" type="text/css" href="./Controlers/php/calendrier/style_calendrier.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale/fr.js'></script>
+  <script>
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-        <script type="text/javascript">
-            jQuery(function($){
-               $('.month').hide();
-               $('.month:first').show();
-               $('.months a:first').addClass('active');
-               var current = 1;
-               $('.months a').click(function(){
-                    var month = $(this).attr('id').replace('linkMonth','');
-                    if(month != current){
-                        $('#month'+current).slideUp();
-                        $('#month'+month).slideDown();
-                        $('.months a').removeClass('active'); 
-                        $('.months a#linkMonth'+month).addClass('active'); 
-                        current = month;
-                    }
-                    return false; 
-               });
-            });
-        </script>
-<!-- FIN CALENDRIER -->
+  $(document).ready(function() {
+   var calendar = $('#calendar').fullCalendar({
+    editable:true,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+    events: 'load.php',
+    selectable:true,
+    selectHelper:true,
+    select: function(start, end, allDay)
+    {
+     var title = prompt("Entrer le titre de votre évènement");
+     if(title)
+     {
+      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+      $.ajax({
+       url:"insert.php",
+       type:"POST",
+       data:{title:title, start:start, end:end},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Evenement ajouté");
+       }
+      })
+     }
+    },
+    editable:true,
+    eventResize:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      url:"update.php",
+      type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function(){
+       calendar.fullCalendar('refetchEvents');
+       alert('Evenement mis à jour');
+      }
+     })
+    },
+
+    eventDrop:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      url:"update.php",
+      type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function()
+      {
+       calendar.fullCalendar('refetchEvents');
+       alert("Evenement mis à jour");
+      }
+     });
+    },
+
+    eventClick:function(event)
+    {
+     if(confirm("Voulez vous vraiment le supprimer ? "))
+     {
+      var id = event.id;
+      $.ajax({
+       url:"delete.php",
+       type:"POST",
+       data:{id:id},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Evenement supprimé");
+       }
+      })
+     }
+    },
+
+   });
+  });
+
+  </script>
 </head>
 
 <body class="home">
@@ -243,7 +316,12 @@ $(document).ready(function () {
     
     </div>
     <!-- CALENDRIER -->
-    <div><?php require(dirname(__FILE__).'/../Controllers/php/calendrier/index_calendrier.php'); ?></div>
+        <br />
+        <h2 align="center">Calendrier</h2>
+        <br />
+        <div class="container">
+        <div id="calendar"></div>
+        </div>
     <div>
     <!-- FIN CALENDRIER --> 
     </div><!-- End Gallery Row -->

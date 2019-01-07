@@ -30,7 +30,7 @@
     && isset($_POST['alimentation_patient'])
     && isset($_POST['type_patient']))
     {
-        var_dump($_POST);
+        //var_dump($_POST);
         // AJOUTER PATIENT
         ajouter_patient_INSERT($_POST['nom_patient'], $_POST['prenom_patient'], $_POST['adresse_patient'],
                                $_POST['cp_patient'], $_POST['ville_patient'], $_POST['email_patient'], 
@@ -65,8 +65,8 @@
         
         // SUPPRESSION DU PATIENT
         fiche_patient_delete($_SESSION['id_patient']);
-        header('Location: index.php?page=patients&choix=liste_patient');
-        exit;
+        //header('Location: index.php?page=patients&choix=liste_patient');
+        //exit;
     }
     
     

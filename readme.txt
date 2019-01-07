@@ -2,7 +2,7 @@ EVAL FS S2 Benjamin RODRIGUEZ
 
 dbname=Eval_fin 
 
-fichier acces bdd : eval_fs\Modeles\access_bdd.php
+fichier config bdd : eval_fs\Modeles\access_bdd.php
 create pour la bdd : eval_fs\Modeles\bdd\create.sql
 insert pour la bdd : eval_fs\Modeles\bdd\insert.sql
 

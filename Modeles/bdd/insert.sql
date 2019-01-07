@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `eval_fin`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `date` DATE NULL,
-  `start_event` DATETIME NOT NULL,
-  `end_event` DATETIME NOT NULL,
+  `start` DATETIME NOT NULL,
+  `end` DATETIME NOT NULL,
   `description` MEDIUMTEXT NULL,
   `patient_id` INT NULL,
   `user_id` INT NULL,
@@ -199,9 +199,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `eval_fin`;
-INSERT INTO `eval_fin`.`events` (`id`, `title`, `date`, `start_event`, `end_event`, `description`, `patient_id`, `user_id`, `fiche_consultation_id`) VALUES (1, 'rdv medecin', '2019/02/02', '11:00', '12:00', 'ompo', 1, 3, 1);
-INSERT INTO `eval_fin`.`events` (`id`, `title`, `date`, `start_event`, `end_event`, `description`, `patient_id`, `user_id`, `fiche_consultation_id`) VALUES (2, 'rdv acu', '2019/01/01', '17:00', '18:30', 'quotidien', 2, 3, 3);
-INSERT INTO `eval_fin`.`events` (`id`, `title`, `date`, `start_event`, `end_event`, `description`, `patient_id`, `user_id`, `fiche_consultation_id`) VALUES (3, 'controle', '2019/10/12', '08:00', '08:30', 'orga', 1, 3, 2);
+INSERT INTO `eval_fin`.`events` (`id`, `title`, `date`, `start`, `end`, `description`, `patient_id`, `user_id`, `fiche_consultation_id`) VALUES (1, 'rdv medecin', '2019/02/02', '11:00', '12:00', 'ompo', 1, 3, 1);
+INSERT INTO `eval_fin`.`events` (`id`, `title`, `date`, `start`, `end`, `description`, `patient_id`, `user_id`, `fiche_consultation_id`) VALUES (2, 'rdv acu', '2019/01/01', '17:00', '18:30', 'quotidien', 2, 3, 3);
+INSERT INTO `eval_fin`.`events` (`id`, `title`, `date`, `start`, `end`, `description`, `patient_id`, `user_id`, `fiche_consultation_id`) VALUES (3, 'controle', '2019/10/12', '08:00', '08:30', 'orga', 1, 3, 2);
 
 COMMIT;
 

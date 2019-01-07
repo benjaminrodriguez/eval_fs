@@ -1,25 +1,25 @@
 <?php
 
-//insert.php
+//update.php
 
 $connect = new PDO('mysql:host=localhost;dbname=eval_fin', 'root', 'toor');
 
-if(isset($_POST["title"]))
+if(isset($_POST["id"]))
 {
  $query = "
- INSERT INTO events
- (title, start_event, end_event)
- VALUES (:title, :start_event, :end_event)
+ UPDATE events
+ SET title=:title, start=:start, end=:end
+ WHERE id=:id
  ";
  $statement = $connect->prepare($query);
  $statement->execute(
   array(
    ':title'  => $_POST['title'],
-   ':start_event' => $_POST['start'],
-   ':end_event' => $_POST['end']
+   ':start' => $_POST['start'],
+   ':end' => $_POST['end'],
+   ':id'   => $_POST['id']
   )
  );
 }
-
 
 ?>

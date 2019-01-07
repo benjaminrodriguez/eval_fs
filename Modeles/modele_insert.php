@@ -56,7 +56,7 @@
         $bdd = bdd();
         // INSCRIPTION
         $inscription = $bdd->prepare(
-        'INSERT INTO events (title, date, date_debut, date_fin, description, fiche_consultation_id, $patient_id, user_id) 
+        'INSERT INTO events (title, date, start, end, description, fiche_consultation_id, $patient_id, user_id) 
         VALUES (?, ?, ?, ?, ?, LAST_INSERT_ID(), ?, ?);
         ');
         $inscription->execute(array($title, $date, $time_debut, $time_fin, $description, $patient, $medecin));

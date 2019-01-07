@@ -73,7 +73,7 @@
     {
         $bdd = bdd();
         $qcm = $bdd->prepare('SELECT events.title AS title, events.date AS date, 
-                              events.start_event AS date_debut, events.end_event AS date_fin, events.description AS description,
+                              events.start AS date_debut, events.end AS date_fin, events.description AS description,
                               user.nom AS nom_medecin, patient.nom AS nom_patient, fiche_consultation_id AS fiche_consultation_id
                               FROM events
                               INNER JOIN patient ON patient.id=events.patient_id
@@ -107,7 +107,7 @@
                 echo "<li> <ul> Docteur : " .$donnees['nom']. " </ul><ul>Type de consultation : " .$donnees['type_consultation']. "</ul><ul> 
                 Type de pathologie : " .$donnees['type_pathologie']. " </ul><ul> Lieu de consultatin : " 
                 .$donnees['lieu_consultation']. "</ul><ul>Protocole utilisé : " .$donnees['protocole_utilise']. " 
-                </ul><ul>Resultat obtenu : " .$donnees['resultat_obtenu']."</ul>"
+                </ul><ul>Resultat obtenu : " .$donnees['resultat_obtenu']."</ul><ul> Fiche numéro : " .$donnees['id']."</ul>"
 
                 ;
             }
@@ -130,7 +130,62 @@
 
     //--------------------------------------------------------------------------------
 
-    
+   
+//--------------------------------------------------------------------------------
 
+function getSearch_patient()
+{
+    $bdd = bdd();
+    $res = "%".$_POST['texte']."%";
+    $req = $bdd->prepare('SELECT * FROM patient WHERE nom LIKE ? OR prenom LIKE ?');
+    $req ->execute(array($res,$res));
+    while ($donnees = $req->fetch())
+            {
+                echo "<li> <ul>nom : " .$donnees['nom']. "</ul><ul> prénom : " .$donnees['prenom']. " </ul><ul> adresse : " 
+                .$donnees['adresse']. "</ul><ul>code postal : " .$donnees['code_postal']. " </ul><ul>ville : " .$donnees['ville'].
+                " </ul><ul> email : " .$donnees['email']. "</ul><ul> date de naissance : " .$donnees['date_de_naissance'].
+                "</ul><ul> téléphone : " .$donnees['telephone']. " </ul><ul> sexe : " .$donnees['sexe'].
+                "</ul><ul> mode de vie : " .$donnees['mode_de_vie']. "</ul><ul> alimentation : " .$donnees['alimentation'].
+                "</ul><ul> type : " .$donnees['type']. "</ul>"
+
+                ;
+            }
+}
+
+//--------------------------------------------------------------------------------
+
+function getSearch_medecin()
+{
+    $bdd = bdd();
+    $res = "%".$_POST['texte']."%";
+    $req = $bdd->prepare('SELECT * FROM user 
+    WHERE nom LIKE ? OR prenom LIKE ?');
+    $req ->execute(array($res,$res));
+    while ($donnees = $req->fetch())
+            {
+                echo "<li>".$donnees['profession']. " | prénom : " .$donnees['prenom']. " | nom : ".$donnees['nom']. " | contact : <a href='mailto:".$donnees['email']."'>".$donnees['email']."</a> </li>";
+
+            }
+}
+
+//--------------------------------------------------------------------------------
+
+function getSearch_consultation()
+{
+    $bdd = bdd();
+    $res = "%".$_POST['texte']."%";
+    $req = $bdd->prepare('SELECT events.tile AS title, events.date AS date, events.start AS start, events.end AS end, patient.nom AS nom_patient, events.description AS description
+    FROM events
+    INNER JOIN patient ON patient.id = events.patient_id
+    INNER JOIN user ON user.id = events.user_id
+    WHERE patient.nom LIKE ? OR patient.prenom LIKE ? OR user.prenom LIKE ? OR user.nom LIKE ?');
+    $req ->execute(array($res,$res));
+    while ($donnees = $req->fetch())
+            {
+                echo "<li>La consultation " .$donnees['title']. "le " .$donnees['date']. 
+                " a eu lieu de " .$donnees['start']." à " .$donnees['end'].  " pour le patient " 
+                .$donnees['nom_patient'].", description : " .$donnees['description']." <a href='./index.php?page=consultation&choix=liste_consultation&id_consultation=".$donnees['fiche_consultation_id']."'>Voir plus</a></li>";
+            }
+}
 ?>
 
